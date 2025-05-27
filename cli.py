@@ -1,80 +1,34 @@
-from database import SessionLocal
-from models import Developer, Company
+from developer_cli import developer_menu
+from company_cli import company_menu
+from project_cli import project_menu
+from freebie_cli import freebie_menu
 import sys
 
-def menu():
+def main_menu():
     print("\n--- Techie Tracker CLI ---")
-    print("1. View all developers")
-    print("2. View all companies")
-    print("3. Add a developer")
-    print("4. Add a company")
+    print("1. Developers")
+    print("2. Companies")
+    print("3. Projects")
+    print("4. Freebies")
     print("5. Exit")
-    choice = input("Choose an option (1-5): ")
-    return choice 
-
-def view_developers(session):
-    developers = session.query(Developer).all()
-    print("\n--- Developers ---")
-    if not developers:
-        print("No developers found.")
-    for dev in developers:
-        print(f"ID: {dev.id} | Name: {dev.name} | Specialty: {dev.specialty}")
-
-def view_companies(session):
-    companies = session.query(Company).all()
-    print("\n--- Companies ---")
-    if not companies:
-        print("No companies found.")
-    for company in companies:
-        print(f"ID: {company.id} | Name: {company.name} | Location: {company.location}")
-    
-def add_developer(session):
-    print("\n--- Add Developer ---")
-    name = input("Name: ")
-    specialty = input("Specialty: ")
-    experience = input("Year of Experience: ")
-
-    try:
-        dev = Developer(name=name, specialty=specialty, year_of_experience=int(experience))
-        session.add(dev)
-        session.commit()
-        print("✅ Developer added successfully.")
-    except Exception as e:
-        session.rollback()
-        print("❌ Error:", e)
-
-def add_company(session):
-    print("\n--- Add Company ---")
-    name = input("Company Name: ")
-    location = input("Location: ")
-
-    try:
-        company = Company(name=name, location=location)
-        session.add(company)
-        session.commit()
-        print("✅ Company added successfully.")
-    except Exception as e:
-        session.rollback()
-        print("❌ Error:", e)
+    return input("Choose an option (1-5): ")
 
 def main():
-    session = SessionLocal()
     while True:
-        choice = menu()
+        choice = main_menu()
         if choice == "1":
-            view_developers(session)
+            developer_menu()
         elif choice == "2":
-            view_companies(session)
+            company_menu()
         elif choice == "3":
-            add_developer(session)
+            project_menu()
         elif choice == "4":
-            add_company(session)
+            freebie_menu()
         elif choice == "5":
-            print("Existing... 👋")
-            session.close()
+            print("Exiting... 👋")
             sys.exit()
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Try again.")
 
 if __name__ == "__main__":
     main()
