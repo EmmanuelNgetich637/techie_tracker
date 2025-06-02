@@ -12,6 +12,8 @@ def developer_menu():
         print("5. Back")
         choice = input("Choose an option (1-5): ")
 
+        from tabulate import tabulate
+
         if choice == "1":
             developers = session.query(Developer).all()
             if not developers:

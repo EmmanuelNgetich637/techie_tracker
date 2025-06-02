@@ -1,1 +1,29 @@
-Generic single-database configuration.
+Techie Tracker
+
+Techie Tracker is a command-line application designed to help developers keep track of there projects.
+
+Features
+
+- Add, view, update, and delete Developers,Companies, Proojects, Freebies
+- Associate Developers with Projects and Companies
+- Search and filter functionality in CLI
+- Clean separation of concerns with modular CLI files:
+    - 'developer_cli.py'
+    - 'company_cli.py'
+    - 'project_cli.py'
+    - 'freebie_cli.py'
+    - 'main_cli.py'
+
+Folder Structure
+
+techie_tracker/
+├── cli/
+│   ├── developer_cli.py
+│   ├── company_cli.py
+│   ├── project_cli.py
+│   └── freebie_cli.py
+├── models.py
+├── db.py
+├── main_cli.py
+└── README.md
+
